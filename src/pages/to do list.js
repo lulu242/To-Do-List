@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toDo } from '../actions/index';
+import { useState } from 'react';
+import Correction from '../component/remove';
 
 const Box = styled.div`
   width: 30px;
@@ -17,31 +19,38 @@ const IconContainter = styled.div`
   align-items: center;
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  cursor: pointer;
 `;
 
 const List = styled.div`
   padding: 5px 10px;
   color: ${(props) => props.color};
   font-size: 20px;
+  cursor: pointer;
 `;
+
 function ToDoList() {
   const state = useSelector((state) => state.todoReducer);
   const per = (state.filter((el) => el.done).length / state.length) * 100;
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false)
 
   const today = new Date();
   const year = today.getFullYear(); // 년도
   const month = today.getMonth() + 1; // 월
   const date = today.getDate(); // 날짜
   const day = today.getDay(); // 요일
-  const 요일 = ['일', '월', '화', '수', '목', '금', '토' ]
+  const 요일 = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
     <div className="main">
-        {/* 날짜 */}
-      <h1 className="day">{year}년 {month}월 {date}일</h1>
+      <Correction />
+      {/* 날짜 */}
+      <h1 className="day">
+        {year}년 {month}월 {date}일
+      </h1>
       <h2 className="week">{요일[day] + '요일'}</h2>
-        {/* 달성률 */}
+      {/* 달성률 */}
       <div className="boxContainter">
         <Box color={per >= 10 ? '#00adb5' : '#eeeeee'} />
         <Box color={per >= 20 ? '#00adb5' : '#eeeeee'} />

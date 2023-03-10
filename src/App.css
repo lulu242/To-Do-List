@@ -3,6 +3,10 @@
   width: 390px;
   height: 844px;
   background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
 }
 
 :root {
@@ -24,8 +28,9 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--gra1);
+  background-color: #a8a8a863;
 }
+
 
 .day {
   font-size: 35px;
@@ -88,4 +93,18 @@ body {
 ul {
   list-style: none;
   padding-left :0px
+}
+
+textarea {
+  border: var(--gra1);
+  height: 92px;
+  width: 358px;
+  border-radius: 10px;
+  color: var(--gar3);
+  margin-bottom: 15px;
+  padding: 15px;
+  outline-style: none; 
+  resize: none;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
 }
