@@ -16,3 +16,12 @@ export const toDo = (id) => {
         }
     }
 }
+
+export const RemoveToDo = (id) => {
+    return {
+        type: "REMOVE_TO_DO",
+        payload: {
+            id
+        }
+    }
+}

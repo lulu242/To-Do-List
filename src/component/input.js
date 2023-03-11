@@ -11,10 +11,11 @@ const ModalContainer = styled.div`
   flex-direction: column;
   background-color: #eeeeee;
   height: 204px;
-  width: 390px;
-  position: relative;
+  width: 350px;
   margin-top: auto;
-`;
+  border-radius: 10px
+  `;
+  
 const IconContainter = styled.div`
   width: ${(props) => (props.width ? props.width : '200px')};
   display: flex;

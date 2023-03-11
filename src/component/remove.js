@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
+import { useDispatch } from 'react-redux';
+import {RemoveToDo} from '../actions/index'
 
 const ModalContainer = styled.div`
   display: flex;
@@ -7,11 +9,10 @@ const ModalContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: #eeeeee;
-  height: 177px;
+  height: 204px;
   width: 350px;
-  position: absolute;
-  top: 65%;
   border-radius: 10px;
+  margin-top: auto;
 `;
 
 const IconContainter = styled.div`
@@ -33,14 +34,25 @@ const Button = styled.button`
   border: none;
 `;
 
-function Correction() {
+function Correction({ setModal, id }) {
+  const dispatch = useDispatch()
   return (
     <ModalContainer>
-      <IconContainter width="290px" content="space-between">
+      <IconContainter width="290px" content="space-between" margin="20px 0px 0px 0px">
         <Button color="#00ADB5">수정하기</Button>
-        <Button color="#393E46">삭제하기</Button>
+        <Button color="#393E46" onClick={(e) => {
+          setModal(false)
+          dispatch(RemoveToDo(id))
+        }}>삭제하기</Button>
       </IconContainter>
-      <IconContainter></IconContainter>
+      <IconContainter content="center" margin="20px 0px 0px 0px" onClick={() => setModal(false)}>
+      <Icon
+              icon="bxs:x-circle"
+              color="white"
+              width="60"
+              height="60"
+            />
+      </IconContainter>
     </ModalContainer>
   );
 }

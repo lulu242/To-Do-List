@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toDo } from '../actions/index';
 import { useState } from 'react';
 import Correction from '../component/remove';
+import InputModal from '../component/input';
+
 
 const Box = styled.div`
   width: 30px;
@@ -27,13 +29,15 @@ const List = styled.div`
   color: ${(props) => props.color};
   font-size: 20px;
   cursor: pointer;
+  text-align: left;
 `;
 
 function ToDoList() {
   const state = useSelector((state) => state.todoReducer);
-  const per = (state.filter((el) => el.done).length / state.length) * 100;
+  const per = (state.filter((el) => el.done).length / state.length) * 100 || 0
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false)
+  const [id, setId] = useState('')
 
   const today = new Date();
   const year = today.getFullYear(); // 년도
@@ -44,7 +48,6 @@ function ToDoList() {
 
   return (
     <div className="main">
-      <Correction />
       {/* 날짜 */}
       <h1 className="day">
         {year}년 {month}월 {date}일
@@ -75,9 +78,9 @@ function ToDoList() {
               <IconContainter>
                 {el.done ? (
                   <Icon
-                    icon="mdi:check-circle-outline"
-                    color="#00adb5"
-                    width="22"
+                  icon="mdi:check-circle-outline"
+                  color="#00adb5"
+                  width="22"
                     height="22"
                   />
                 ) : (
@@ -95,7 +98,10 @@ function ToDoList() {
               >
                 {el.todo}
               </List>
-              <IconContainter margin="0px 0px 0px auto">
+              <IconContainter margin="0px 0px 0px auto" onClick={() => {
+                setModal(true)
+                setId(el.id)
+                }}>
                 <Icon
                   icon="majesticons:more-menu"
                   color="#d9d9d9"
@@ -107,6 +113,7 @@ function ToDoList() {
           );
         })}
       </ul>
+      {!modal ? <InputModal />: modal ? <Correction setModal={setModal} id={id}/> : null}
     </div>
   );
 }
