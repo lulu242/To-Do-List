@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toDo, ModalSet } from '../actions/index';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Correction from '../component/remove';
 import InputModal from '../component/input';
 

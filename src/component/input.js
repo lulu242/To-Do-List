@@ -24,20 +24,26 @@ const IconContainter = styled.div`
   margin: ${(props) => props.margin};
 `;
 
-function InputModal( {id}) {
+function InputModal({ id }) {
   const [input, setInput] = useState('');
   const inputModal = useSelector((state) => state.modalReducer.input);
   const correct = useSelector((state) => state.modalReducer.correct);
   const todoState = useSelector((state) => state.todoReducer);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    if(correct) {
-      const filtered = todoState.filter(el => el.id === id)[0].todo
-      setInput(filtered)
-      dispatch(CorrectSet(false))
+  useEffect(() => {
+    if (correct) {
+      const filtered = todoState.filter((el) => el.id === id)[0].todo;
+      setInput(filtered);
+      dispatch(CorrectSet(false));
     }
-  }, [id])
+  }, [id]);
+
+  function add() {
+    dispatch(addToDo(id, input));
+    setInput('');
+    dispatch(InputSet(!inputModal));
+  }
 
   return (
     <>
@@ -46,6 +52,7 @@ function InputModal( {id}) {
           <textarea
             placeholder="할 일을 입력 후, Enter를 눌러주세요"
             onChange={(e) => setInput(e.target.value)}
+            onKeyUp={(e) => e.code === 'Enter' && add()}
             value={input}
           ></textarea>
           <IconContainter content="space-between">
@@ -54,11 +61,7 @@ function InputModal( {id}) {
               color="#00adb5"
               width="60"
               height="60"
-              onClick={(e) => {
-                dispatch(addToDo(id, input));
-                setInput('');
-                dispatch(InputSet(!inputModal));
-              }}
+              onClick={(e) => add()}
             />
             <Icon
               icon="bxs:x-circle"
@@ -66,8 +69,9 @@ function InputModal( {id}) {
               width="60"
               height="60"
               onClick={() => {
-                dispatch(InputSet(!inputModal))
-                setInput('')}}
+                dispatch(InputSet(!inputModal));
+                setInput('');
+              }}
             />
           </IconContainter>
         </ModalContainer>
@@ -89,6 +93,5 @@ function InputModal( {id}) {
     </>
   );
 }
-
 
 export default InputModal;
