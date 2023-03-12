@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
-import { useDispatch } from 'react-redux';
-import {RemoveToDo} from '../actions/index'
+import { useDispatch, useSelector } from 'react-redux';
+import { RemoveToDo, InputSet, ModalSet} from '../actions/index'
 
 const ModalContainer = styled.div`
   display: flex;
@@ -36,6 +36,9 @@ const Button = styled.button`
 
 function Correction({ setModal, id }) {
   const dispatch = useDispatch()
+  const modal = useSelector((state => state.modalReducer.modal))
+  const inputModal = useSelector((state) => state.modalReducer.input);
+
   return (
     <ModalContainer>
       <IconContainter width="290px" content="space-between" margin="20px 0px 0px 0px">
@@ -44,11 +47,11 @@ function Correction({ setModal, id }) {
           setModal(false)
           }}>수정하기</Button>
         <Button color="#393E46" onClick={(e) => {
-          setModal(false)
-          dispatch(RemoveToDo(id))
+          dispatch(ModalSet(false));
+          dispatch(RemoveToDo(id));
         }}>삭제하기</Button>
       </IconContainter>
-      <IconContainter content="center" margin="20px 0px 0px 0px" onClick={() => setModal(false)}>
+      <IconContainter content="center" margin="20px 0px 0px 0px" onClick={() => dispatch(ModalSet(false))}>
       <Icon
               icon="bxs:x-circle"
               color="white"

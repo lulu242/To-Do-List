@@ -37,7 +37,7 @@ function ToDoList() {
   const per = (state.filter((el) => el.done).length / state.length) * 100 || 0
   const dispatch = useDispatch();
   // const [modal, setModal] = useState(false)
-  const modal = useSelector((state => state.modalReducer))
+  const modal = useSelector((state => state.modalReducer.modal))
   const [id, setId] = useState('')
 
   const today = new Date();
@@ -114,7 +114,7 @@ function ToDoList() {
           );
         })}
       </ul>
-      {!modal ? <InputModal />:<Correction id={id}/>}
+      {modal ? <Correction id={id}/>: <InputModal />}
     </div>
   );
 }
