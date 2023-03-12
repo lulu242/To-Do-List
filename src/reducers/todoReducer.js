@@ -9,7 +9,7 @@ const todoReducer = (state = initialState.todo, action) => {
           const copy = [...state];
           copy[idx].todo = action.payload.todo
           return copy
-        } else return [...state, { id: String(state.length), ...action.payload }];
+        } else return [...state, {...action.payload,  id: String(state.length)}];
       }
     }
 
