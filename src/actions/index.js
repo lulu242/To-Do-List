@@ -25,3 +25,21 @@ export const RemoveToDo = (id) => {
         }
     }
 }
+
+export const InputSet = (input) => {
+    return {
+        type: 'INPUT',
+        payload: {
+            input
+        }
+    }
+}
+
+export const ModalSet = (modal) => {
+    return {
+        type: 'MODAL',
+        payload: {
+            modal
+        }
+    }
+}

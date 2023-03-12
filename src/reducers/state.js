@@ -10,3 +10,9 @@ export const initialState = {
     ]
 }
 
+// 모달이 거짓이면 인풋 트루면 수정/삭제
+// input이 거짓이면 + 사실이면 입력창
+export const modalState = {
+    modal: false,
+    input: false
+}

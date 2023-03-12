@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toDo } from '../actions/index';
+import { toDo, ModalSet } from '../actions/index';
 import { useState } from 'react';
 import Correction from '../component/remove';
 import InputModal from '../component/input';
@@ -36,7 +36,8 @@ function ToDoList() {
   const state = useSelector((state) => state.todoReducer);
   const per = (state.filter((el) => el.done).length / state.length) * 100 || 0
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false)
+  // const [modal, setModal] = useState(false)
+  const modal = useSelector((state => state.modalReducer))
   const [id, setId] = useState('')
 
   const today = new Date();
@@ -99,7 +100,7 @@ function ToDoList() {
                 {el.todo}
               </List>
               <IconContainter margin="0px 0px 0px auto" onClick={() => {
-                setModal(true)
+                dispatch(ModalSet(true))
                 setId(el.id)
                 }}>
                 <Icon
@@ -113,7 +114,7 @@ function ToDoList() {
           );
         })}
       </ul>
-      {!modal ? <InputModal />: modal ? <Correction setModal={setModal} id={id}/> : null}
+      {!modal ? <InputModal />:<Correction id={id}/>}
     </div>
   );
 }

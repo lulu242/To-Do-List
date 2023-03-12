@@ -39,7 +39,10 @@ function Correction({ setModal, id }) {
   return (
     <ModalContainer>
       <IconContainter width="290px" content="space-between" margin="20px 0px 0px 0px">
-        <Button color="#00ADB5">수정하기</Button>
+        <Button color="#00ADB5"
+        onClick={(e) => {
+          setModal(false)
+          }}>수정하기</Button>
         <Button color="#393E46" onClick={(e) => {
           setModal(false)
           dispatch(RemoveToDo(id))

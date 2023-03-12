@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
-import { addToDo } from '../actions';
-import { useDispatch } from 'react-redux';
+import { addToDo, ModalSet } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ModalContainer = styled.div`
   display: flex;
@@ -25,51 +25,40 @@ const IconContainter = styled.div`
 `;
 
 function InputModal() {
-  const [modal, setModal] = useState(false);
   const [input, setInput] = useState('');
+  const modal = useSelector(state => state.modalReducer)
   const dispatch = useDispatch();
 
   return (
     <>
-      {modal ? (
+      { modal ? (
         <ModalContainer>
-          <textarea
-            placeholder="할 일을 입력 후, Enter를 눌러주세요"
+          <textarea placeholder="할 일을 입력 후, Enter를 눌러주세요"
             onChange={(e) => setInput(e.target.value)}
             value={input}
           ></textarea>
           <IconContainter content="space-between">
-            <Icon
-              icon="bxs:plus-circle"
-              color="#00adb5"
-              width="60"
-              height="60"
-              onClick={(e) => {
+            <Icon icon="bxs:plus-circle" color="#00adb5" width="60" height="60" onClick={(e) => {
                 dispatch(addToDo(input));
-                setInput('');
-              }}
-            />
+                setInput('')
+                dispatch(ModalSet(!modal))}}/>
             <Icon
               icon="bxs:x-circle"
               color="#222831"
               width="60"
               height="60"
-              onClick={() => setModal(!modal)}
+              onClick={() => dispatch(ModalSet(!modal))}
             />
           </IconContainter>
         </ModalContainer>
-      ) : (
-        <IconContainter
-          margin="auto 0px 20px 0px"
-          width="100%"
-          content="center"
-        >
+) : (
+        <IconContainter margin="auto 0px 20px 0px" width="100%" content="center">
           <Icon
             icon="bxs:plus-circle"
             color="#00adb5"
             width="60"
             height="60"
-            onClick={() => setModal(!modal)}
+            onClick={() => dispatch(ModalSet(!modal))}
           />
         </IconContainter>
       )}
