@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toDo, ModalSet } from '../actions/index';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Correction from '../component/remove';
 import InputModal from '../component/input';
 
@@ -46,7 +46,7 @@ function ToDoList() {
   const date = today.getDate(); // 날짜
   const day = today.getDay(); // 요일
   const 요일 = ['일', '월', '화', '수', '목', '금', '토'];
-
+  
   return (
     <div className="main">
       {/* 날짜 */}
@@ -114,7 +114,7 @@ function ToDoList() {
           );
         })}
       </ul>
-      {modal ? <Correction id={id}/>: <InputModal />}
+      {modal ? <Correction id={id}/>: <InputModal id={id} />}
     </div>
   );
 }

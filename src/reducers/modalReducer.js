@@ -12,6 +12,12 @@ const modalReducer = (state = modalState, action) => {
         copy.modal = action.payload.modal;
         return copy
       }
+      case 'CORRECT': {
+        const copy = {...state};
+        copy.correct = action.payload.correct;
+        return copy
+      }
+
       default:
         return state;
     }

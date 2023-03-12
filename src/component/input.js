@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
-import { addToDo, InputSet } from '../actions';
+import { useEffect, useState } from 'react';
+import { addToDo, InputSet, CorrectSet } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ModalContainer = styled.div`
@@ -24,10 +24,20 @@ const IconContainter = styled.div`
   margin: ${(props) => props.margin};
 `;
 
-function InputModal() {
+function InputModal( {id}) {
   const [input, setInput] = useState('');
   const inputModal = useSelector((state) => state.modalReducer.input);
+  const correct = useSelector((state) => state.modalReducer.correct);
+  const todoState = useSelector((state) => state.todoReducer);
   const dispatch = useDispatch();
+
+  useEffect(()=> {
+    if(correct) {
+      const filtered = todoState.filter(el => el.id === id)[0].todo
+      setInput(filtered)
+      dispatch(CorrectSet(false))
+    }
+  }, [id])
 
   return (
     <>
@@ -45,7 +55,7 @@ function InputModal() {
               width="60"
               height="60"
               onClick={(e) => {
-                dispatch(addToDo(input));
+                dispatch(addToDo(id, input));
                 setInput('');
                 dispatch(InputSet(!inputModal));
               }}
@@ -55,7 +65,9 @@ function InputModal() {
               color="#222831"
               width="60"
               height="60"
-              onClick={() => dispatch(InputSet(!inputModal))}
+              onClick={() => {
+                dispatch(InputSet(!inputModal))
+                setInput('')}}
             />
           </IconContainter>
         </ModalContainer>
@@ -77,5 +89,6 @@ function InputModal() {
     </>
   );
 }
+
 
 export default InputModal;

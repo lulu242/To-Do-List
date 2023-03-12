@@ -1,7 +1,8 @@
-export const addToDo = (todo) => {
+export const addToDo = (id, todo) => {
     return {
         type: 'ADD_TO_DO',
         payload: {
+            id,
             todo,
             done: false
         }
@@ -40,6 +41,15 @@ export const ModalSet = (modal) => {
         type: 'MODAL',
         payload: {
             modal
+        }
+    }
+}
+
+export const CorrectSet = (correct) => {
+    return {
+        type: 'CORRECT',
+        payload: {
+            correct
         }
     }
 }
