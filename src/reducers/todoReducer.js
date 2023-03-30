@@ -2,6 +2,10 @@ import { initialState } from './state';
 
 const todoReducer = (state = initialState.todo, action) => {
   switch (action.type) {
+    case 'INIT': {
+      return action.payload.data
+    }
+
     case 'ADD_TO_DO': {
       if (action.payload.todo !== '') {
         if(action.payload.id) {

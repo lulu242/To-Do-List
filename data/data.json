@@ -3,22 +3,22 @@
     {
       "id": 1,
       "todo": "to to list 완성하기1",
-      "done": "false"
+      "done": false
     },
     {
       "id": 2,
       "todo": "to to list 완성하기2",
-      "done": "false"
+      "done": false
     },
     {
       "id": 3,
       "todo": "to to list 완성하기3",
-      "done": "false"
+      "done": false
     },
     {
       "id": 4,
       "todo": "to to list 완성하기4",
-      "done": "false"
+      "done": false
     }
   ],
   "goal" : [
@@ -42,5 +42,3 @@
       }
   ]
 }
-
-// json-server --watch data.json --port 3001

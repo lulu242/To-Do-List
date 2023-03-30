@@ -53,3 +53,12 @@ export const CorrectSet = (correct) => {
         }
     }
 }
+
+export const Init = (data) => {
+    return {
+        type: 'INIT',
+        payload: {
+            data
+        }
+    }
+}
