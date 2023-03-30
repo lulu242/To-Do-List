@@ -82,7 +82,8 @@ function ToDoList() {
                   icon="mdi:check-circle-outline"
                   color="#00adb5"
                   width="22"
-                    height="22"
+                  height="22"
+                  onClick={() => dispatch(toDo(el.id))}
                   />
                 ) : (
                   <Icon
@@ -90,6 +91,7 @@ function ToDoList() {
                     color="#d9d9d9"
                     width="22"
                     height="22"
+                    onClick={() => dispatch(toDo(el.id))}
                   />
                 )}
               </IconContainter>
