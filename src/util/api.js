@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { addToDo } from "../actions";
+
+
 export const fetchCreate = (url, data) => {
     fetch(url, {
         method: "POST",
@@ -7,12 +11,13 @@ export const fetchCreate = (url, data) => {
         },
         body: JSON.stringify(data)
     })
-    .then(() => {
-        // 데이터 추가 상태변경
-    })
-    .catch((error) => {
-        console.error('Error', error);
-    })
+//     .then(res => {
+//         dispatch(addToDo(res))
+//         console.log(res)
+//     })
+//     .catch((error) => {
+//         console.error('Error', error);
+//     })
 }
 
 export const fetchDelete = (url, id) => {

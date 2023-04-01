@@ -1,10 +1,10 @@
-export const addToDo = (id, todo) => {
+export const addToDo = ({id, todo, done}) => {
     return {
         type: 'ADD_TO_DO',
         payload: {
-            id,
-            todo,
-            done: false
+           id,
+           todo,
+           done
         }
     }
 }

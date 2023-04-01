@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
-import { addToDo, InputSet, CorrectSet } from '../actions';
+import { addToDo, InputSet, CorrectSet, Init } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchCreate } from '../util/api';
 
 const ModalContainer = styled.div`
   display: flex;
@@ -40,9 +41,32 @@ function InputModal({ id }) {
   }, [id]);
 
   function add() {
-    dispatch(addToDo(id, input));
     setInput('');
     dispatch(InputSet(!inputModal));
+
+    if(input !== '' && input !== '\n'){
+      fetch('http://localhost:3001/todo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          todo: input,
+          done: false,
+        }),
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(data)
+        dispatch(addToDo(data));
+      })
+      .catch((error) => {
+        console.error('Error', error);
+      });
+    }
   }
 
   return (

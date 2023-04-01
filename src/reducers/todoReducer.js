@@ -8,12 +8,16 @@ const todoReducer = (state = initialState.todo, action) => {
 
     case 'ADD_TO_DO': {
       if (action.payload.todo !== '') {
-        if(action.payload.id) {
-          const idx = state.findIndex((el) => el.id === action.payload.id);
-          const copy = [...state];
-          copy[idx].todo = action.payload.todo
-          return copy
-        } else return [...state, {...action.payload,  id: String(state.length)}];
+        // if(action.payload.id) {
+        //   const idx = state.findIndex((el) => el.id === action.payload.id);
+        //   const copy = [...state];
+        //   copy[idx].todo = action.payload.todo
+        //   return copy
+        // } else return [...state, {...action.payload,  id: String(state.length)}];
+        const idx = state.findIndex((el) => el.id === action.payload.id);
+        if(idx > -1){
+          //수정 작성
+        } else return [...state, action.payload]
       }
     }
 
