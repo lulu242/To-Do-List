@@ -10,6 +10,8 @@ import { Init } from './actions';
 
 function App() {
   const dispatch = useDispatch()
+
+  // 초기 데이터 불러오기
   useEffect(() => {
     fetch("http://localhost:3001/todo")
     .then(res => {
@@ -20,6 +22,7 @@ function App() {
     })
     .then(data => dispatch(Init(data)))
   }, [])
+  
   return (
     <div className="App">
       <Header />

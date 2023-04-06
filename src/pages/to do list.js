@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Correction from '../component/remove';
 import InputModal from '../component/input';
 
-
 const Box = styled.div`
   width: 30px;
   height: 30px;
@@ -34,11 +33,11 @@ const List = styled.div`
 
 function ToDoList() {
   const state = useSelector((state) => state.todoReducer);
-  const per = (state.filter((el) => el.done).length / state.length) * 100 || 0
+  const per = (state.filter((el) => el.done).length / state.length) * 100 || 0;
   const dispatch = useDispatch();
   // const [modal, setModal] = useState(false)
-  const modal = useSelector((state => state.modalReducer.modal))
-  const [id, setId] = useState('')
+  const modal = useSelector((state) => state.modalReducer.modal);
+  const [id, setId] = useState('');
 
   const today = new Date();
   const year = today.getFullYear(); // 년도
@@ -46,7 +45,28 @@ function ToDoList() {
   const date = today.getDate(); // 날짜
   const day = today.getDay(); // 요일
   const 요일 = ['일', '월', '화', '수', '목', '금', '토'];
-  
+
+  // 완료체크
+  function check(data) {
+    fetch(`http://localhost:3001/todo/` + data.id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({"done": !data.done}),
+    })
+    .then((res) => {
+      return res.json()
+    })
+    .then(data => {
+      dispatch(toDo(data))
+    })
+    .catch((error) => {
+      console.error('Error', error);
+    });
+  }
+
   return (
     <div className="main">
       {/* 날짜 */}
@@ -79,11 +99,11 @@ function ToDoList() {
               <IconContainter>
                 {el.done ? (
                   <Icon
-                  icon="mdi:check-circle-outline"
-                  color="#00adb5"
-                  width="22"
-                  height="22"
-                  onClick={() => dispatch(toDo(el.id))}
+                    icon="mdi:check-circle-outline"
+                    color="#00adb5"
+                    width="22"
+                    height="22"
+                    onClick={() => check(el)}
                   />
                 ) : (
                   <Icon
@@ -91,20 +111,23 @@ function ToDoList() {
                     color="#d9d9d9"
                     width="22"
                     height="22"
-                    onClick={() => dispatch(toDo(el.id))}
+                    onClick={() => check(el)}
                   />
                 )}
               </IconContainter>
               <List
                 color={el.done ? '#D9D9D9' : '#222831'}
-                onClick={() => dispatch(toDo(el.id))}
+                onClick={() => check(el)}
               >
                 {el.todo}
               </List>
-              <IconContainter margin="0px 0px 0px auto" onClick={() => {
-                dispatch(ModalSet(true))
-                setId(el.id)
-                }}>
+              <IconContainter
+                margin="0px 0px 0px auto"
+                onClick={() => {
+                  dispatch(ModalSet(true));
+                  setId(el.id);
+                }}
+              >
                 <Icon
                   icon="majesticons:more-menu"
                   color="#d9d9d9"
@@ -116,7 +139,7 @@ function ToDoList() {
           );
         })}
       </ul>
-      {modal ? <Correction id={id}/>: <InputModal id={id} />}
+      {modal ? <Correction id={id} /> : <InputModal id={id} />}
     </div>
   );
 }

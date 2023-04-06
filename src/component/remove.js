@@ -37,6 +37,17 @@ const Button = styled.button`
 function Correction({ id }) {
   const dispatch = useDispatch()
 
+  //삭제 함수
+  function remove(id) {
+    fetch('http://localhost:3001/todo/' + id, {
+      method: "DELETE"
+    })
+    .then(dispatch(RemoveToDo(id)))
+    .catch((error) => {
+      console.error('Error', error);
+    })
+  }
+
   return (
     <ModalContainer>
       <IconContainter width="290px" content="space-between" margin="20px 0px 0px 0px">
@@ -48,7 +59,7 @@ function Correction({ id }) {
           }}>수정하기</Button>
         <Button color="#393E46" onClick={(e) => {
           dispatch(ModalSet(false));
-          dispatch(RemoveToDo(id));
+          remove(id);
         }}>삭제하기</Button>
       </IconContainter>
       <IconContainter content="center" margin="20px 0px 0px 0px" onClick={() => dispatch(ModalSet(false))}>

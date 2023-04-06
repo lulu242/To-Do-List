@@ -6,8 +6,7 @@ const todoReducer = (state = initialState.todo, action) => {
       return action.payload.data
     }
 
-    case 'ADD_TO_DO': {
-      if (action.payload.todo !== '') {
+    case 'ADD_TO_DO': { 
         // if(action.payload.id) {
         //   const idx = state.findIndex((el) => el.id === action.payload.id);
         //   const copy = [...state];
@@ -16,9 +15,11 @@ const todoReducer = (state = initialState.todo, action) => {
         // } else return [...state, {...action.payload,  id: String(state.length)}];
         const idx = state.findIndex((el) => el.id === action.payload.id);
         if(idx > -1){
-          //수정 작성
+          const copy = [...state];
+          copy[idx] = action.payload;
+          return copy
         } else return [...state, action.payload]
-      }
+      
     }
 
     case 'TO_DO': {

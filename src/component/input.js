@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
-import { addToDo, InputSet, CorrectSet, Init } from '../actions';
+import { addToDo, InputSet, CorrectSet } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCreate } from '../util/api';
+
 
 const ModalContainer = styled.div`
   display: flex;
@@ -36,23 +36,23 @@ function InputModal({ id }) {
     if (correct) {
       const filtered = todoState.filter((el) => el.id === id)[0].todo;
       setInput(filtered);
-      dispatch(CorrectSet(false));
     }
   }, [id]);
 
   function add() {
     setInput('');
     dispatch(InputSet(!inputModal));
-
-    if(input !== '' && input !== '\n'){
-      fetch('http://localhost:3001/todo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          todo: input,
+    //새로추가
+    if(!correct) {
+      if(input !== ''){
+        fetch('http://localhost:3001/todo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            todo: input,
           done: false,
         }),
       })
@@ -69,6 +69,31 @@ function InputModal({ id }) {
     }
   }
 
+  //수정
+    if(correct) {
+      if(input !== ''){
+        fetch(`http://localhost:3001/todo/` + id, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({"todo": input}),
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then(data => {
+          dispatch(addToDo(data))
+        })
+        .catch((error) => {
+          console.error('Error', error);
+        });
+      }
+    }
+    dispatch(CorrectSet(false));
+  }
+
   return (
     <>
       {inputModal ? (
@@ -77,6 +102,7 @@ function InputModal({ id }) {
             placeholder="할 일을 입력 후, Enter를 눌러주세요"
             onChange={(e) => setInput(e.target.value)}
             onKeyUp={(e) => e.code === 'Enter' && add()}
+            onKeyDown={e => e.code === 'Enter' && e.preventDefault()}
             value={input}
           ></textarea>
           <IconContainter content="space-between">

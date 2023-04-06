@@ -1,20 +1,15 @@
-export const addToDo = ({id, todo, done}) => {
+export const addToDo = (data) => {
     return {
         type: 'ADD_TO_DO',
-        payload: {
-           id,
-           todo,
-           done
-        }
+        payload: data
+ 
     }
 }
 
-export const toDo = (id) => {
+export const toDo = (data) => {
     return {
         type: 'TO_DO',
-        payload: {
-            id
-        }
+        payload: data
     }
 }
 
