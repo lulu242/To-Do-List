@@ -19,6 +19,9 @@ const Li = styled.li`
   font-size: 20px;
   font-weight: 800;
   position: relative;
+  :hover {
+    color: #00ADB5;
+  }
   ::after {
     content: '';
     background-color: #d9d9d9;

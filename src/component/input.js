@@ -109,15 +109,15 @@ function InputModal({ id }) {
             <Icon
               icon="bxs:plus-circle"
               color="#00adb5"
-              width="60"
-              height="60"
+              width="70"
+              height="70"
               onClick={(e) => add()}
             />
             <Icon
               icon="bxs:x-circle"
               color="#222831"
-              width="60"
-              height="60"
+              width="70"
+              height="70"
               onClick={() => {
                 dispatch(InputSet(!inputModal));
                 setInput('');
@@ -134,8 +134,8 @@ function InputModal({ id }) {
           <Icon
             icon="bxs:plus-circle"
             color="#00adb5"
-            width="60"
-            height="60"
+            width="70"
+            height="70"
             onClick={() => dispatch(InputSet(!inputModal))}
           />
         </IconContainter>
