@@ -39,7 +39,7 @@ body {
 a {
   text-decoration: none; /* 밑줄 제거 */
 }
-.day {
+.title {
   font-size: 35px;
   color: var(--gra2);
   font-weight: 700;

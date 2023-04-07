@@ -49,6 +49,16 @@ export const CorrectSet = (correct) => {
     }
 }
 
+
+export const TabSet = (tab) => {
+    return {
+        type: 'TAB',
+        payload: {
+            tab
+        }
+    }
+}
+
 export const Init = (data) => {
     return {
         type: 'INIT',
@@ -57,3 +67,4 @@ export const Init = (data) => {
         }
     }
 }
+

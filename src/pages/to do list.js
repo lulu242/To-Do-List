@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toDo, ModalSet } from '../actions/index';
+import { toDo, ModalSet, TabSet } from '../actions/index';
 import { useState } from 'react';
 import Correction from '../component/remove';
 import InputModal from '../component/input';
@@ -70,7 +70,7 @@ function ToDoList() {
   return (
     <div className="main">
       {/* 날짜 */}
-      <h1 className="day">
+      <h1 className="title">
         {year}년 {month}월 {date}일
       </h1>
       <h2 className="week">{요일[day] + '요일'}</h2>
@@ -126,6 +126,7 @@ function ToDoList() {
                 onClick={() => {
                   dispatch(ModalSet(true));
                   setId(el.id);
+                  dispatch(TabSet(1))
                 }}
               >
                 <Icon

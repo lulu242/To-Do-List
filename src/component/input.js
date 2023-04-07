@@ -23,6 +23,7 @@ const IconContainter = styled.div`
   justify-content: ${(props) => props.content};
   align-items: center;
   margin: ${(props) => props.margin};
+  cursor: pointer;
 `;
 
 function InputModal({ id }) {

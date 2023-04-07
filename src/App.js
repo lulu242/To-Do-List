@@ -1,19 +1,19 @@
 import './App.css';
 import Header from './component/header';
 import ToDoList from './pages/to do list';
-import Goal from './pages/goal lst';
 import Made from './pages/made';
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Init } from './actions';
 import Nav from './component/nav';
+import Calendar from './pages/calender';
 
 function App() {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
 
-  // 초기 데이터 불러오기
+  // 초기 데이터 불러오기 todo
   useEffect(() => {
     fetch("http://localhost:3001/todo")
     .then(res => {
@@ -24,6 +24,7 @@ function App() {
     })
     .then(data => dispatch(Init(data)))
   }, [])
+
   
   return (
     <div className="App">
@@ -31,7 +32,7 @@ function App() {
       <Header setOpen={setOpen}/>
       <Routes>
         <Route path="/" element={<ToDoList />} />
-        <Route path="/goal" element={<Goal />} />
+        <Route path="/calender" element={<Calendar />} />
         <Route path="/made" element={<Made />} />
       </Routes>
     </div>

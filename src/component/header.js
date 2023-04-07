@@ -12,7 +12,7 @@ const Container = styled.div`
 const Title = styled.div`
   color: #00adb5;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 650;
   flex: 10;
   padding-left: 38px;
 `;

@@ -53,8 +53,8 @@ function Nav({ setOpen }) {
           <Link to="/">
             <Li onClick={(e) => setOpen(false)}>오늘의 할 일</Li>
           </Link>
-          <Link to="/goal">
-            <Li onClick={(e) => setOpen(false)}>목표 보기</Li>
+          <Link to="/calender">
+            <Li onClick={(e) => setOpen(false)}>달력 보기</Li>
           </Link>
           <Link to="/made">
             <Li onClick={(e) => setOpen(false)}>만든 사람</Li>
