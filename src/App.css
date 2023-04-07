@@ -118,3 +118,76 @@ textarea {
   font-size: 18px;
   font-family: Arial, sans-serif;
 }
+
+.calendar {
+  display: inline-block;
+  padding: 10px;
+  margin: 20px auto 20px auto;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #393e46;
+
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #393e46;
+}
+.weekdays :first-child {
+  color: #00adb5;
+}
+.weekdays :last-child {
+  color: #03c2cc;
+}
+
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  color: #393e46;
+}
+
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+/* 토요일의 날짜 색상 변경 */
+.day:nth-of-type(7n) {
+  color: #03c2cc;
+}
+
+/* 일요일의 날짜 색상 변경 */
+.day:nth-of-type(7n + 1) {
+  color: #00adb5;
+}
+
+.empty {
+  visibility: hidden;
+}
+
+button {
+  background-color: var(--gra1);
+  color: var(--bl-color);
+  font-weight: 800;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
