@@ -3,17 +3,17 @@
     {
       "id": 1,
       "todo": "to to list 완성하기1",
-      "done": false
+      "done": true
     },
     {
       "id": 2,
-      "todo": "to to list 완성하기2",
+      "todo": "to to list 완성하기2ㅎㅎ",
       "done": false
     },
     {
       "id": 4,
       "todo": "to to list 완성하기4",
-      "done": false
+      "done": true
     }
   ],
   "goal": [

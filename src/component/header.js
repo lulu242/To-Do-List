@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 
+
 const Container = styled.div`
   background-color: #393e46;
   height: 58px;
@@ -19,21 +20,24 @@ const Title = styled.div`
 const IconContainter = styled.div`
   flex: 1;
   padding-right: 5px;
+  cursor: pointer;
 `;
 
-function Header() {
+function Header({setOpen}) {
+
   return (
-    <Container>
-      <Title>To Do List</Title>
-      <IconContainter>
-        <Icon
-          icon="material-symbols:menu"
-          color="#d9d9d9"
-          width="33"
-          height="33"
-        />
-      </IconContainter>
-    </Container>
+      <Container>
+        <Title>To Do List</Title>
+        <IconContainter>
+          <Icon
+            icon="material-symbols:menu"
+            color="#d9d9d9"
+            width="33"
+            height="33"
+            onClick={e => setOpen(true)}
+          />
+        </IconContainter>
+      </Container>
   );
 }
 

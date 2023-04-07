@@ -4,12 +4,14 @@ import ToDoList from './pages/to do list';
 import Goal from './pages/goal lst';
 import Made from './pages/made';
 import { Routes, Route, Link } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Init } from './actions';
+import Nav from './component/nav';
 
 function App() {
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false);
 
   // 초기 데이터 불러오기
   useEffect(() => {
@@ -25,7 +27,8 @@ function App() {
   
   return (
     <div className="App">
-      <Header />
+      {open ? <Nav setOpen={setOpen}/> : null}
+      <Header setOpen={setOpen}/>
       <Routes>
         <Route path="/" element={<ToDoList />} />
         <Route path="/goal" element={<Goal />} />
